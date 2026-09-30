@@ -58,13 +58,13 @@
             <p class="breadcrumb">Operations / Attention</p>
             <h1>Attention</h1>
           </div>
-          <div class="attention-summary" aria-label="Attention summary">
-            <div><strong id="summaryCount">5</strong><span>things need you</span></div>
-            <div><strong id="autoCount">2</strong><span>can be handled by Santé</span></div>
-          </div>
         </section>
 
         <section class="queue" aria-label="Prioritized attention queue">
+          <div class="section-heading">
+            <h2>Needs your decision</h2>
+            <span><strong id="summaryCount">5</strong> open</span>
+          </div>
           <div class="queue-label">
             <span>Priority</span>
             <span>Decision</span>
@@ -73,15 +73,16 @@
           <article class="attention-row priority-high" data-item="modelo">
             <div class="priority-column">
               <span class="priority-mark"></span>
-              <span><strong>High priority</strong><small>Inventory</small></span>
+              <span><strong>Urgent</strong><small>Inventory</small></span>
             </div>
             <div class="decision-column">
               <div class="decision-copy">
                 <p class="product-name">Modelo Especial 12 Pack</p>
                 <h2>Likely to run out Saturday.</h2>
                 <div class="inline-metrics">
-                  <span><strong>12</strong> sold this week</span>
                   <span><strong>3</strong> remaining</span>
+                  <span><strong>12</strong> sold this week</span>
+                  <span><strong>Order cutoff</strong> Thu 2 PM</span>
                 </div>
               </div>
               <div class="row-actions">
@@ -94,16 +95,15 @@
           <article class="attention-row" data-item="titos">
             <div class="priority-column">
               <span class="priority-mark"></span>
-              <span><strong>Needs review</strong><small>Pricing</small></span>
+              <span><strong>Review</strong><small>Pricing</small></span>
             </div>
             <div class="decision-column">
               <div class="decision-copy">
                 <p class="product-name">Tito’s Handmade Vodka 1L</p>
                 <h2>Distributor cost increased 8.4%.</h2>
                 <div class="inline-metrics">
-                  <span><small>Previous cost</small><strong>$21.40</strong></span>
-                  <span><small>New cost</small><strong>$23.20</strong></span>
-                  <span><small>New margin</small><strong>27.5%</strong></span>
+                  <span><strong>$21.40</strong> → <strong>$23.20</strong></span>
+                  <span>Margin <strong>33.1%</strong> → <strong>27.5%</strong></span>
                 </div>
               </div>
               <div class="row-actions">
@@ -115,7 +115,7 @@
           <article class="attention-row" data-item="rose">
             <div class="priority-column">
               <span class="priority-mark"></span>
-              <span><strong>Opportunity</strong><small>Sell-through</small></span>
+              <span><strong>Opportunity</strong><small>Marketing</small></span>
             </div>
             <div class="decision-column">
               <div class="decision-copy">
@@ -124,6 +124,7 @@
                 <div class="inline-metrics">
                   <span><strong>19</strong> bottles in stock</span>
                   <span><strong>2</strong> sold in 30 days</span>
+                  <span><strong>73 days</strong> in inventory</span>
                 </div>
               </div>
               <div class="row-actions">
@@ -135,7 +136,7 @@
           <article class="attention-row" data-item="casamigos">
             <div class="priority-column">
               <span class="priority-mark"></span>
-              <span><strong>Inventory</strong><small>Count mismatch</small></span>
+              <span><strong>Review</strong><small>Inventory</small></span>
             </div>
             <div class="decision-column">
               <div class="decision-copy">
@@ -156,7 +157,7 @@
           <article class="attention-row" data-item="receiving">
             <div class="priority-column">
               <span class="priority-mark"></span>
-              <span><strong>Receiving</strong><small>Invoice 18433</small></span>
+              <span><strong>Review</strong><small>Receiving</small></span>
             </div>
             <div class="decision-column">
               <div class="decision-copy">
@@ -172,6 +173,21 @@
               </div>
             </div>
           </article>
+
+          <section class="handled-section" aria-labelledby="handledTitle">
+            <div class="handled-heading">
+              <div>
+                <h2 id="handledTitle">Handled by Santé</h2>
+                <p>Routine work completed automatically</p>
+              </div>
+              <span>Today</span>
+            </div>
+            <ul class="handled-list">
+              <li><span class="handled-check">✓</span><span><strong>12 new products categorized</strong><small>Inventory</small></span><time>10:18 AM</time></li>
+              <li><span class="handled-check">✓</span><span><strong>Online inventory synchronized</strong><small>eCommerce</small></span><time>9:51 AM</time></li>
+              <li><span class="handled-check">✓</span><span><strong>3 product descriptions prepared</strong><small>Marketing</small></span><time>8:32 AM</time></li>
+            </ul>
+          </section>
         </section>
       </main>
 

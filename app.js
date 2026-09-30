@@ -6,7 +6,6 @@ const toastMessage = document.querySelector('#toastMessage');
 const toastUndo = document.querySelector('#toastUndo');
 const navCount = document.querySelector('#navCount');
 const summaryCount = document.querySelector('#summaryCount');
-const autoCount = document.querySelector('#autoCount');
 const sidebar = document.querySelector('.sidebar');
 const menuButton = document.querySelector('#menuButton');
 
@@ -18,28 +17,37 @@ const modeloTemplate = () => `
   <div class="panel-body">
     <p class="panel-eyebrow">Smart reorder decision</p>
     <h2>Modelo Especial 12 Pack</h2>
-    <p class="panel-lede">Santé noticed that current stock will probably not cover demand before the next delivery arrives.</p>
-    <div class="evidence-grid" aria-label="Recommendation evidence">
-      <div class="evidence-cell"><span>Remaining</span><strong>3 packs</strong></div>
-      <div class="evidence-cell"><span>Sold in last 7 days</span><strong>12 packs</strong></div>
-      <div class="evidence-cell"><span>Average weekly sales</span><strong>9 packs</strong></div>
-      <div class="evidence-cell"><span>Next distributor delivery</span><strong>Friday</strong></div>
-      <div class="evidence-cell"><span>Estimated stockout</span><strong>Saturday</strong></div>
-      <div class="evidence-cell"><span>Order cutoff</span><strong>Thu, 2:00 PM</strong></div>
+    <div class="decision-story" aria-label="Stockout decision evidence">
+      <div class="story-row primary"><span>On hand</span><strong>3 packs left</strong></div>
+      <div class="story-row"><span>At the current sales rate</span><strong>Approximately 9 packs per week</strong></div>
+      <div class="story-row"><span>Next distributor delivery</span><strong>Friday</strong></div>
+      <div class="story-row expected"><span>Expected</span><strong>Stockout Saturday</strong></div>
+      <div class="story-row"><span>Order cutoff</span><strong>Thursday at 2:00 PM</strong></div>
     </div>
     <div class="recommendation">
-      <p class="recommendation-label">Santé recommendation</p>
+      <p class="recommendation-label">Santé recommends</p>
       <h3>Add <span id="quantityText">${quantity}</span> cases to Thursday’s order.</h3>
       <p>This should cover expected sales through the following delivery while keeping roughly one week of buffer stock.</p>
       <div class="quantity-control" aria-label="Change case quantity">
         <button id="decreaseQuantity" type="button" aria-label="Decrease quantity">−</button>
-        <output id="quantityOutput">${quantity} cases</output>
+        <output id="quantityOutput" tabindex="-1">${quantity} cases</output>
         <button id="increaseQuantity" type="button" aria-label="Increase quantity">+</button>
       </div>
     </div>
-    <button class="explanation-toggle" id="explanationToggle" type="button" aria-expanded="false">Why is Santé recommending this?</button>
+    <button class="explanation-toggle" id="explanationToggle" type="button" aria-expanded="false">Why ${quantity} cases?</button>
     <div class="explanation" id="explanation">
-      The recommendation uses current on-hand quantity, sales from the last seven days, the longer weekly sales average, case pack size, and Empire Merchants’ next scheduled delivery. It does not change the order until you approve it.
+      3 packs on hand + <span id="calculationPacks">${quantity * 6}</span> packs in <span id="calculationCases">${quantity}</span> distributor cases − approximately 9 packs of expected sales = about <span id="calculationRemaining">${Math.max(0, 3 + (quantity * 6) - 9)}</span> packs remaining at the following delivery. Santé used recent sales, the longer weekly average, the distributor case pack, and delivery schedule. No order changes until you approve them.
+    </div>
+    <div class="action-preview" aria-label="Pending order change">
+      <div class="action-preview-head"><span>Add to order</span><strong>Modelo Especial 12 Pack</strong></div>
+      <dl>
+        <div><dt>Quantity</dt><dd id="previewQuantity">${quantity} cases</dd></div>
+        <div><dt>Distributor</dt><dd>Metro Beverage Distributors</dd></div>
+        <div><dt>Order</dt><dd>Thursday order</dd></div>
+        <div><dt>Estimated cost</dt><dd id="estimatedCost">$208.80</dd></div>
+        <div><dt>Expected after delivery</dt><dd id="expectedInventory">15 packs</dd></div>
+        <div><dt>Case pack</dt><dd>6 retail packs</dd></div>
+      </dl>
     </div>
     <div class="panel-actions">
       <button class="button primary" id="approveModelo" type="button">Add ${quantity} cases</button>
@@ -51,22 +59,22 @@ const modeloTemplate = () => `
 const titosTemplate = `
   <div class="panel-body">
     <p class="panel-eyebrow">Pricing decision</p>
-    <h2>Distributor cost changed</h2>
-    <p class="panel-lede">The latest invoice for Tito’s Handmade Vodka 1L has a higher unit cost than the previous delivery.</p>
-    <div class="price-comparison" aria-label="Cost comparison">
-      <div class="price-block"><span>Previous cost</span><strong>$21.40</strong></div>
-      <div class="price-block"><span>New cost</span><strong>$23.20</strong></div>
-      <div class="price-block highlight"><span>Increase</span><strong>8.4%</strong></div>
-    </div>
-    <div class="margin-shift">
-      <div><span>Previous margin</span><strong>33.1%</strong></div>
-      <span class="margin-arrow">to</span>
-      <div><span>Margin at $31.99</span><strong>27.5%</strong></div>
-    </div>
-    <div class="recommendation">
-      <p class="recommendation-label">Santé recommendation</p>
-      <h3>Change retail price to $34.99.</h3>
-      <p>At $34.99, estimated gross margin returns to 33.7%, close to the 33.1% margin before the cost increase.</p>
+    <h2>Tito’s Handmade Vodka 1L</h2>
+    <div class="causal-flow" aria-label="Price recommendation reasoning">
+      <div class="causal-step">
+        <span class="causal-label">Cost changed</span>
+        <div class="causal-value"><strong>$21.40 → $23.20</strong><small>8.4% increase</small></div>
+      </div>
+      <div class="causal-arrow" aria-hidden="true"></div>
+      <div class="causal-step">
+        <span class="causal-label">At current $31.99 price</span>
+        <div class="causal-value"><strong>33.1% → 27.5%</strong><small>Gross margin</small></div>
+      </div>
+      <div class="causal-arrow" aria-hidden="true"></div>
+      <div class="causal-step recommended">
+        <span class="causal-label">Santé recommends</span>
+        <div class="causal-value"><strong>$34.99</strong><small>Estimated margin 33.7%</small></div>
+      </div>
     </div>
     <button class="explanation-toggle" id="explanationToggle" type="button" aria-expanded="false">How was this price calculated?</button>
     <div class="explanation" id="explanation">Santé used the new $23.20 unit cost and the previous gross margin as the target, then rounded to a familiar shelf price. Tax is excluded from this margin calculation.</div>
@@ -110,6 +118,13 @@ function bindPanelActions(type) {
       document.querySelector('#quantityText').textContent = quantity;
       document.querySelector('#quantityOutput').textContent = `${quantity} ${quantity === 1 ? 'case' : 'cases'}`;
       document.querySelector('#approveModelo').textContent = `Add ${quantity} ${quantity === 1 ? 'case' : 'cases'}`;
+      document.querySelector('#explanationToggle').textContent = `Why ${quantity} ${quantity === 1 ? 'case' : 'cases'}?`;
+      document.querySelector('#previewQuantity').textContent = `${quantity} ${quantity === 1 ? 'case' : 'cases'}`;
+      document.querySelector('#estimatedCost').textContent = `$${(quantity * 104.4).toFixed(2)}`;
+      document.querySelector('#expectedInventory').textContent = `${3 + (quantity * 6)} packs`;
+      document.querySelector('#calculationPacks').textContent = quantity * 6;
+      document.querySelector('#calculationCases').textContent = quantity;
+      document.querySelector('#calculationRemaining').textContent = Math.max(0, 3 + (quantity * 6) - 9);
     };
     document.querySelector('#decreaseQuantity').addEventListener('click', () => updateQuantity(quantity - 1));
     document.querySelector('#increaseQuantity').addEventListener('click', () => updateQuantity(quantity + 1));
@@ -134,7 +149,6 @@ function updateCounts() {
   const total = document.querySelectorAll('.attention-row:not(.resolved)').length;
   navCount.textContent = total;
   summaryCount.textContent = total;
-  autoCount.textContent = Math.min(2, total);
 }
 
 function showToast(message, canUndo = false) {
