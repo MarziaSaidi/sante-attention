@@ -98,7 +98,8 @@ h1 { max-width: 940px; margin: 20px 0 0; font-size: clamp(44px, 6vw, 74px); font
 .about h2 { font-size: clamp(30px, 3.4vw, 44px); }
 .about-copy > p { max-width: 650px; margin: 19px 0 0; color: var(--muted); font-size: 15px; line-height: 1.58; }
 .profile-links { display: flex; gap: 25px; margin-top: 24px; }
-.profile-links span { color: var(--muted); font-size: 14px; font-weight: 700; cursor: not-allowed; }
+.profile-links a { color: var(--muted); font-size: 14px; font-weight: 700; text-underline-offset: 4px; }
+.profile-links a:hover { color: var(--accent); }
 .closing { align-self: end; padding-left: 30px; border-left: 1px solid var(--line); }
 .closing p { max-width: 430px; margin: 0; font-size: 24px; font-weight: 620; letter-spacing: -.025em; line-height: 1.26; }
 
