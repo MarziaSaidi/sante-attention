@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Santé Attention, a product concept for reviewing important store decisions in one place." />
+    <meta name="theme-color" content="#f4f4f1" />
+    <title>Santé Attention</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <a class="brand" href="#" aria-label="Santé home">
+          <span class="brand-mark">S</span>
+          <span>SANTÉ</span>
+        </a>
+
+        <nav class="nav-list">
+          <a href="#">Home</a>
+          <a href="#">Checkout</a>
+          <a href="#">Inventory</a>
+          <a href="#">Orders</a>
+          <a href="#">Customers</a>
+          <a href="#">Marketing</a>
+          <a href="#">Reports</a>
+          <a class="active" href="#attention" aria-current="page">
+            <span>Attention</span>
+            <span class="nav-count" id="navCount">5</span>
+          </a>
+        </nav>
+
+        <div class="store-switcher">
+          <span class="store-avatar">W</span>
+          <span>
+            <strong>West Village Wine</strong>
+            <small>New York, NY</small>
+          </span>
+          <button type="button" aria-label="Open store menu">•••</button>
+        </div>
+      </aside>
+
+      <main class="workspace" id="attention">
+        <header class="topbar">
+          <button class="mobile-menu" id="menuButton" type="button" aria-label="Open navigation" aria-expanded="false">Menu</button>
+          <div class="sync-status" aria-label="System status">
+            <span class="status-dot"></span>
+            Store is up to date
+          </div>
+          <div class="top-actions">
+            <button class="icon-button" type="button" aria-label="Search">⌕</button>
+            <button class="profile-button" type="button" aria-label="Open profile">MS</button>
+          </div>
+        </header>
+
+        <section class="page-head">
+          <div>
+            <p class="breadcrumb">Operations / Attention</p>
+            <h1>Attention</h1>
+          </div>
+          <div class="attention-summary" aria-label="Attention summary">
+            <div><strong id="summaryCount">5</strong><span>things need you</span></div>
+            <div><strong id="autoCount">2</strong><span>can be handled by Santé</span></div>
+          </div>
+        </section>
+
+        <section class="queue" aria-label="Prioritized attention queue">
+          <div class="queue-label">
+            <span>Priority</span>
+            <span>Decision</span>
+          </div>
+
+          <article class="attention-row priority-high" data-item="modelo">
+            <div class="priority-column">
+              <span class="priority-mark"></span>
+              <span><strong>High priority</strong><small>Inventory</small></span>
+            </div>
+            <div class="decision-column">
+              <div class="decision-copy">
+                <p class="product-name">Modelo Especial 12 Pack</p>
+                <h2>Likely to run out Saturday.</h2>
+                <div class="inline-metrics">
+                  <span><strong>12</strong> sold this week</span>
+                  <span><strong>3</strong> remaining</span>
+                </div>
+              </div>
+              <div class="row-actions">
+                <button class="button primary" data-open="modelo" type="button">Add to next order</button>
+                <button class="button quiet" data-open="modelo" type="button">Why?</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="attention-row" data-item="titos">
+            <div class="priority-column">
+              <span class="priority-mark"></span>
+              <span><strong>Needs review</strong><small>Pricing</small></span>
+            </div>
+            <div class="decision-column">
+              <div class="decision-copy">
+                <p class="product-name">Tito’s Handmade Vodka 1L</p>
+                <h2>Distributor cost increased 8.4%.</h2>
+                <div class="inline-metrics">
+                  <span><small>Previous cost</small><strong>$21.40</strong></span>
+                  <span><small>New cost</small><strong>$23.20</strong></span>
+                  <span><small>New margin</small><strong>27.5%</strong></span>
+                </div>
+              </div>
+              <div class="row-actions">
+                <button class="button secondary" data-open="titos" type="button">Review pricing</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="attention-row" data-item="rose">
+            <div class="priority-column">
+              <span class="priority-mark"></span>
+              <span><strong>Opportunity</strong><small>Sell-through</small></span>
+            </div>
+            <div class="decision-column">
+              <div class="decision-copy">
+                <p class="product-name">Whispering Angel Rosé</p>
+                <h2>$428 is tied up in slow-moving inventory.</h2>
+                <div class="inline-metrics">
+                  <span><strong>19</strong> bottles in stock</span>
+                  <span><strong>2</strong> sold in 30 days</span>
+                </div>
+              </div>
+              <div class="row-actions">
+                <button class="button secondary" data-action="promotion" type="button">Create promotion</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="attention-row" data-item="casamigos">
+            <div class="priority-column">
+              <span class="priority-mark"></span>
+              <span><strong>Inventory</strong><small>Count mismatch</small></span>
+            </div>
+            <div class="decision-column">
+              <div class="decision-copy">
+                <p class="product-name">Casamigos Blanco</p>
+                <h2>Latest count is 4 units below expected.</h2>
+                <div class="inline-metrics">
+                  <span><small>Expected</small><strong>14</strong></span>
+                  <span><small>Latest count</small><strong>10</strong></span>
+                  <span><small>Difference</small><strong>4</strong></span>
+                </div>
+              </div>
+              <div class="row-actions">
+                <button class="button secondary" data-action="discrepancy" type="button">Review discrepancy</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="attention-row" data-item="receiving">
+            <div class="priority-column">
+              <span class="priority-mark"></span>
+              <span><strong>Receiving</strong><small>Invoice 18433</small></span>
+            </div>
+            <div class="decision-column">
+              <div class="decision-copy">
+                <p class="product-name">Empire Merchants delivery</p>
+                <h2>One invoice item could not be confidently matched.</h2>
+                <div class="inline-metrics">
+                  <span><strong>23 of 24</strong> items matched</span>
+                  <span>Received today at 9:42 AM</span>
+                </div>
+              </div>
+              <div class="row-actions">
+                <button class="button secondary" data-action="match" type="button">Review match</button>
+              </div>
+            </div>
+          </article>
+        </section>
+      </main>
+
+      <div class="scrim" id="scrim" hidden></div>
+      <aside class="decision-panel" id="decisionPanel" aria-label="Decision details" aria-hidden="true">
+        <div class="panel-topbar">
+          <button class="back-button" id="closePanel" type="button">Back to Attention</button>
+          <span class="panel-step">Decision review</span>
+        </div>
+        <div id="panelContent"></div>
+      </aside>
+
+      <div class="toast" id="toast" role="status" aria-live="polite" aria-hidden="true">
+        <span id="toastMessage"></span>
+        <button id="toastUndo" type="button">Undo</button>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
