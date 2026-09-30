@@ -6,7 +6,7 @@
     <meta name="description" content="Santé Attention, a product concept for reviewing important store decisions in one place." />
     <meta name="theme-color" content="#f4f4f1" />
     <title>Santé Attention</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=5" />
   </head>
   <body>
     <div class="app-shell">
@@ -120,7 +120,7 @@
             <div class="decision-column">
               <div class="decision-copy">
                 <p class="product-name">Whispering Angel Rosé</p>
-                <h2>$428 is tied up in slow-moving inventory.</h2>
+                <h2>$376 is tied up in slow-moving inventory.</h2>
                 <div class="inline-metrics">
                   <span><strong>19</strong> bottles in stock</span>
                   <span><strong>2</strong> sold in 30 days</span>
@@ -128,7 +128,7 @@
                 </div>
               </div>
               <div class="row-actions">
-                <button class="button secondary" data-action="promotion" type="button">Create promotion</button>
+                <button class="button secondary" data-open="rose" type="button">Review opportunity</button>
               </div>
             </div>
           </article>
@@ -183,6 +183,13 @@
               <span>Today</span>
             </div>
             <ul class="handled-list">
+              <li id="promotionActivity" hidden>
+                <button class="activity-button" id="openPromotionActivity" type="button">
+                  <span class="handled-check">✓</span>
+                  <span><strong>Whispering Angel promotion scheduled</strong><small>Marketing</small></span>
+                  <time>Starts Friday</time>
+                </button>
+              </li>
               <li><span class="handled-check">✓</span><span><strong>12 new products categorized</strong><small>Inventory</small></span><time>10:18 AM</time></li>
               <li><span class="handled-check">✓</span><span><strong>Online inventory synchronized</strong><small>eCommerce</small></span><time>9:51 AM</time></li>
               <li><span class="handled-check">✓</span><span><strong>3 product descriptions prepared</strong><small>Marketing</small></span><time>8:32 AM</time></li>
@@ -205,6 +212,6 @@
         <button id="toastUndo" type="button">Undo</button>
       </div>
     </div>
-    <script src="app.js"></script>
+    <script src="app.js?v=5"></script>
   </body>
 </html>
