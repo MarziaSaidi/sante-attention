@@ -147,7 +147,12 @@ button:focus-visible, a:focus-visible {
 
 .sync-status { display: flex; align-items: center; gap: 8px; margin-right: auto; color: var(--muted); font-size: 13px; }
 .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); }
+.reset-demo { margin-right: 16px; padding: 5px 0; border: 0; border-bottom: 1px solid transparent; background: transparent; color: var(--muted); font-size: 12px; cursor: pointer; }
+.reset-demo:hover { border-bottom-color: var(--line-strong); color: var(--ink); }
 .top-actions { display: flex; align-items: center; gap: 9px; }
+
+.demo-guide { display: flex; flex-wrap: wrap; gap: 7px 13px; max-width: 1240px; margin: 0 auto; padding: 0 42px 19px; color: var(--muted); font-size: 12px; }
+.demo-guide a { color: var(--accent-dark); font-weight: 680; text-underline-offset: 3px; }
 .icon-button, .profile-button, .mobile-menu {
   display: grid;
   min-width: 34px;
@@ -406,13 +411,16 @@ h1 { margin: 0; font-size: clamp(40px, 4vw, 58px); font-weight: 620; letter-spac
   .workspace { margin-left: 0; }
   .mobile-menu { display: grid; margin-right: 14px; }
   .page-head { padding-inline: 24px; }
+  .demo-guide { padding-inline: 24px; }
   .queue { padding-inline: 24px; }
 }
 
 @media (max-width: 680px) {
   .topbar { padding-inline: 16px; }
   .sync-status { font-size: 12px; }
+  .reset-demo { margin-right: 11px; }
   .page-head { padding: 32px 18px 28px; }
+  .demo-guide { padding: 0 18px 18px; }
   .queue { padding: 0 18px 40px; }
   .queue-label { display: none; }
   .attention-row { display: block; padding: 20px 0 22px; }

@@ -3,215 +3,146 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Santé Attention, a product concept for reviewing important store decisions in one place." />
-    <meta name="theme-color" content="#f4f4f1" />
-    <title>Santé Attention</title>
-    <link rel="stylesheet" href="styles.css?v=5" />
+    <meta name="description" content="An independent product exploration of decision supervision for Santé." />
+    <meta name="theme-color" content="#f4f2ed" />
+    <title>Santé Attention | Product Exploration</title>
+    <link rel="stylesheet" href="presentation.css?v=1" />
   </head>
   <body>
-    <div class="app-shell">
-      <aside class="sidebar" aria-label="Primary navigation">
-        <a class="brand" href="#" aria-label="Santé home">
-          <span class="brand-mark">S</span>
-          <span>SANTÉ</span>
-        </a>
+    <header class="exploration-nav">
+      <a class="author" href="/">Marzia Saidi</a>
+      <span>Independent product exploration. Not affiliated with Santé.</span>
+    </header>
 
-        <nav class="nav-list">
-          <a href="#">Home</a>
-          <a href="#">Checkout</a>
-          <a href="#">Inventory</a>
-          <a href="#">Orders</a>
-          <a href="#">Customers</a>
-          <a href="#">Marketing</a>
-          <a href="#">Reports</a>
-          <a class="active" href="#attention" aria-current="page">
-            <span>Attention</span>
-            <span class="nav-count" id="navCount">5</span>
-          </a>
-        </nav>
-
-        <div class="store-switcher">
-          <span class="store-avatar">W</span>
-          <span>
-            <strong>West Village Wine</strong>
-            <small>New York, NY</small>
-          </span>
-          <button type="button" aria-label="Open store menu">•••</button>
+    <main>
+      <section class="intro" aria-labelledby="introTitle">
+        <p class="section-label">Product exploration</p>
+        <h1 id="introTitle">What happens when your POS starts doing the work?</h1>
+        <p class="intro-copy">Santé already connects the systems that run a store. I explored how merchants might supervise decisions as more of that work becomes agentic.</p>
+        <div class="question-block">
+          <p class="section-label">The question</p>
+          <p>As Santé's agents notice problems, prepare actions, and handle routine work, how does a store owner know:</p>
+          <p class="question-line">what needs them, why it matters, and what Santé can safely handle?</p>
         </div>
-      </aside>
+        <div class="intro-actions">
+          <a class="primary-link" href="/prototype">Open the prototype →</a>
+          <a class="text-link" href="#thinking">See the thinking</a>
+        </div>
+      </section>
 
-      <main class="workspace" id="attention">
-        <header class="topbar">
-          <button class="mobile-menu" id="menuButton" type="button" aria-label="Open navigation" aria-expanded="false">Menu</button>
-          <div class="sync-status" aria-label="System status">
-            <span class="status-dot"></span>
-            Store is up to date
+      <section class="content-section" id="thinking" aria-labelledby="observedTitle">
+        <p class="section-label">What I observed</p>
+        <h2 id="observedTitle">The interface has a new responsibility.</h2>
+        <p class="section-copy">Santé is bringing inventory, ordering, pricing, marketing, ecommerce, receiving, and reporting into one operating system.</p>
+        <p class="section-copy">As these systems become more automated, the interface must not just show information. It must help the merchant supervise decisions.</p>
+        <div class="flow-comparison">
+          <div class="flow-group">
+            <h3>Today</h3>
+            <div class="flow"><span>Store data</span><span class="flow-arrow">→</span><span>Reports and workflows</span><span class="flow-arrow">→</span><span>Merchant finds what needs action</span></div>
           </div>
-          <div class="top-actions">
-            <button class="icon-button" type="button" aria-label="Search">⌕</button>
-            <button class="profile-button" type="button" aria-label="Open profile">MS</button>
+          <div class="flow-group">
+            <h3>Hypothesis</h3>
+            <div class="flow flow-four"><span>Store data</span><span class="flow-arrow">→</span><span>Santé detects what matters</span><span class="flow-arrow">→</span><span>Santé prepares an action</span><span class="flow-arrow">→</span><span>Merchant decides when necessary</span></div>
           </div>
-        </header>
+        </div>
+      </section>
 
-        <section class="page-head">
+      <section class="content-section" aria-labelledby="attentionTitle">
+        <p class="section-label">The product hypothesis</p>
+        <h2 id="attentionTitle">Attention</h2>
+        <p class="lead-line">A decision layer across Santé.</p>
+        <p class="section-copy">Instead of asking a merchant to continuously check inventory, pricing, orders, receiving, and marketing, Attention surfaces the situations that require judgment and separates them from routine work Santé can handle.</p>
+        <div class="distinction">
           <div>
-            <p class="breadcrumb">Operations / Attention</p>
-            <h1>Attention</h1>
+            <h3>Needs your decision</h3>
+            <p>Consequential actions.</p>
+            <ul><li>Pricing</li><li>Purchasing</li><li>Promotions</li><li>Inventory discrepancies</li></ul>
           </div>
-        </section>
-
-        <section class="queue" aria-label="Prioritized attention queue">
-          <div class="section-heading">
-            <h2>Needs your decision</h2>
-            <span><strong id="summaryCount">5</strong> open</span>
+          <div>
+            <h3>Handled by Santé</h3>
+            <p>Routine, reversible work.</p>
+            <ul><li>Synchronization</li><li>Categorization</li><li>Preparation</li><li>Background maintenance</li></ul>
           </div>
-          <div class="queue-label">
-            <span>Priority</span>
-            <span>Decision</span>
-          </div>
-
-          <article class="attention-row priority-high" data-item="modelo">
-            <div class="priority-column">
-              <span class="priority-mark"></span>
-              <span><strong>Urgent</strong><small>Inventory</small></span>
-            </div>
-            <div class="decision-column">
-              <div class="decision-copy">
-                <p class="product-name">Modelo Especial 12 Pack</p>
-                <h2>Likely to run out Saturday.</h2>
-                <div class="inline-metrics">
-                  <span><strong>3</strong> remaining</span>
-                  <span><strong>12</strong> sold this week</span>
-                  <span><strong>Order cutoff</strong> Thu 2 PM</span>
-                </div>
-              </div>
-              <div class="row-actions">
-                <button class="button primary" data-open="modelo" type="button">Add to next order</button>
-                <button class="button quiet" data-open="modelo" type="button">Why?</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="attention-row" data-item="titos">
-            <div class="priority-column">
-              <span class="priority-mark"></span>
-              <span><strong>Review</strong><small>Pricing</small></span>
-            </div>
-            <div class="decision-column">
-              <div class="decision-copy">
-                <p class="product-name">Tito’s Handmade Vodka 1L</p>
-                <h2>Distributor cost increased 8.4%.</h2>
-                <div class="inline-metrics">
-                  <span><strong>$21.40</strong> → <strong>$23.20</strong></span>
-                  <span>Margin <strong>33.1%</strong> → <strong>27.5%</strong></span>
-                </div>
-              </div>
-              <div class="row-actions">
-                <button class="button secondary" data-open="titos" type="button">Review pricing</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="attention-row" data-item="rose">
-            <div class="priority-column">
-              <span class="priority-mark"></span>
-              <span><strong>Opportunity</strong><small>Marketing</small></span>
-            </div>
-            <div class="decision-column">
-              <div class="decision-copy">
-                <p class="product-name">Whispering Angel Rosé</p>
-                <h2>$376 is tied up in slow-moving inventory.</h2>
-                <div class="inline-metrics">
-                  <span><strong>19</strong> bottles in stock</span>
-                  <span><strong>2</strong> sold in 30 days</span>
-                  <span><strong>73 days</strong> in inventory</span>
-                </div>
-              </div>
-              <div class="row-actions">
-                <button class="button secondary" data-open="rose" type="button">Review opportunity</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="attention-row" data-item="casamigos">
-            <div class="priority-column">
-              <span class="priority-mark"></span>
-              <span><strong>Review</strong><small>Inventory</small></span>
-            </div>
-            <div class="decision-column">
-              <div class="decision-copy">
-                <p class="product-name">Casamigos Blanco</p>
-                <h2>Latest count is 4 units below expected.</h2>
-                <div class="inline-metrics">
-                  <span><small>Expected</small><strong>14</strong></span>
-                  <span><small>Latest count</small><strong>10</strong></span>
-                  <span><small>Difference</small><strong>4</strong></span>
-                </div>
-              </div>
-              <div class="row-actions">
-                <button class="button secondary" data-action="discrepancy" type="button">Review discrepancy</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="attention-row" data-item="receiving">
-            <div class="priority-column">
-              <span class="priority-mark"></span>
-              <span><strong>Review</strong><small>Receiving</small></span>
-            </div>
-            <div class="decision-column">
-              <div class="decision-copy">
-                <p class="product-name">Empire Merchants delivery</p>
-                <h2>One invoice item could not be confidently matched.</h2>
-                <div class="inline-metrics">
-                  <span><strong>23 of 24</strong> items matched</span>
-                  <span>Received today at 9:42 AM</span>
-                </div>
-              </div>
-              <div class="row-actions">
-                <button class="button secondary" data-action="match" type="button">Review match</button>
-              </div>
-            </div>
-          </article>
-
-          <section class="handled-section" aria-labelledby="handledTitle">
-            <div class="handled-heading">
-              <div>
-                <h2 id="handledTitle">Handled by Santé</h2>
-                <p>Routine work completed automatically</p>
-              </div>
-              <span>Today</span>
-            </div>
-            <ul class="handled-list">
-              <li id="promotionActivity" hidden>
-                <button class="activity-button" id="openPromotionActivity" type="button">
-                  <span class="handled-check">✓</span>
-                  <span><strong>Whispering Angel promotion scheduled</strong><small>Marketing</small></span>
-                  <time>Starts Friday</time>
-                </button>
-              </li>
-              <li><span class="handled-check">✓</span><span><strong>12 new products categorized</strong><small>Inventory</small></span><time>10:18 AM</time></li>
-              <li><span class="handled-check">✓</span><span><strong>Online inventory synchronized</strong><small>eCommerce</small></span><time>9:51 AM</time></li>
-              <li><span class="handled-check">✓</span><span><strong>3 product descriptions prepared</strong><small>Marketing</small></span><time>8:32 AM</time></li>
-            </ul>
-          </section>
-        </section>
-      </main>
-
-      <div class="scrim" id="scrim" hidden></div>
-      <aside class="decision-panel" id="decisionPanel" aria-label="Decision details" aria-hidden="true">
-        <div class="panel-topbar">
-          <button class="back-button" id="closePanel" type="button">Back to Attention</button>
-          <span class="panel-step">Decision review</span>
         </div>
-        <div id="panelContent"></div>
-      </aside>
+        <a class="primary-link compact" href="/prototype">Open Attention →</a>
+      </section>
 
-      <div class="toast" id="toast" role="status" aria-live="polite" aria-hidden="true">
-        <span id="toastMessage"></span>
-        <button id="toastUndo" type="button">Undo</button>
-      </div>
-    </div>
-    <script src="app.js?v=5"></script>
+      <section class="content-section" aria-labelledby="examplesTitle">
+        <p class="section-label">Three examples</p>
+        <h2 id="examplesTitle">Different decisions, one supervisory layer.</h2>
+        <div class="examples">
+          <article>
+            <span class="example-number">01</span>
+            <p class="example-type">Prevent a problem</p>
+            <h3>Modelo Especial</h3>
+            <p>3 packs remain.<br />Stockout expected Saturday.<br />Next delivery Monday.</p>
+            <p><strong>Santé prepares:</strong><br />Add 2 cases before Thursday's cutoff.</p>
+            <p class="merchant-line">Merchant decides.</p>
+          </article>
+          <article>
+            <span class="example-number">02</span>
+            <p class="example-type">Respond to change</p>
+            <h3>Tito's</h3>
+            <p>Distributor cost:<br /><strong>$21.40 → $23.20</strong></p>
+            <p>Margin:<br /><strong>33.1% → 27.5%</strong></p>
+            <p><strong>Santé prepares:</strong><br />$34.99 retail price.</p>
+            <p class="merchant-line">Merchant decides.</p>
+          </article>
+          <article>
+            <span class="example-number">03</span>
+            <p class="example-type">Find an opportunity</p>
+            <h3>Whispering Angel</h3>
+            <p>19 bottles in stock.<br />2 sold in 30 days.<br />73 days in inventory.</p>
+            <p><strong>Santé prepares:</strong><br />A short promotion across POS, ecommerce, and marketing.</p>
+            <p class="merchant-line">Merchant reviews before publishing.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section" aria-labelledby="principlesTitle">
+        <p class="section-label">Design principles</p>
+        <h2 id="principlesTitle">How I approached agentic UX</h2>
+        <ol class="principles">
+          <li><span>01</span><div><h3>Surface, don't make users search</h3><p>Bring important situations to the merchant instead of requiring them to find them in reports.</p></div></li>
+          <li><span>02</span><div><h3>Show the reasoning</h3><p>Recommendations expose the operational evidence behind them.</p></div></li>
+          <li><span>03</span><div><h3>Prepare before acting</h3><p>Santé can do the tedious setup while the merchant retains control over consequential decisions.</p></div></li>
+          <li><span>04</span><div><h3>Automation should be auditable</h3><p>Routine work can happen automatically, but merchants should still be able to see what changed.</p></div></li>
+        </ol>
+      </section>
+
+      <section class="content-section" aria-labelledby="validateTitle">
+        <p class="section-label">Assumptions and research</p>
+        <h2 id="validateTitle">What I'd validate next</h2>
+        <p class="lead-line">This is a hypothesis built from Santé's public product direction, not internal customer research.</p>
+        <p class="section-copy">With merchants, I'd want to learn:</p>
+        <ol class="research-questions">
+          <li><span>01</span><p>Which decisions actually interrupt their day?</p></li>
+          <li><span>02</span><p>Which actions would they trust Santé to handle automatically?</p></li>
+          <li><span>03</span><p>Where do they need explanation before approving a recommendation?</p></li>
+          <li><span>04</span><p>When does an “attention” layer reduce work, and when does it become another inbox?</p></li>
+        </ol>
+      </section>
+
+      <section class="content-section about" id="about" aria-labelledby="aboutTitle">
+        <p class="section-label">About me</p>
+        <h2 id="aboutTitle">Why I explored this</h2>
+        <p class="section-copy">I'm Marzia, a product designer with a computer science background. I like working where product design and engineering overlap: understanding an ambiguous workflow, designing the interaction, and building enough of it to test the idea.</p>
+        <p class="section-copy">I've worked in early-stage environments where the product process was still being formed, and I prototype in Figma and code with tools including Claude and Codex.</p>
+        <div class="profile-links" aria-label="Profile link placeholders">
+          <span title="Add portfolio URL">Portfolio →</span>
+          <span title="Add LinkedIn URL">LinkedIn →</span>
+        </div>
+      </section>
+
+      <section class="closing" aria-labelledby="closingTitle">
+        <h2 id="closingTitle">I'd love to know where this hypothesis is right, wrong, or already obsolete inside Santé.</h2>
+        <a class="primary-link" href="/prototype">Explore the prototype →</a>
+      </section>
+    </main>
+
+    <footer>
+      <span>Independent product exploration by Marzia Saidi.</span>
+      <span>Not affiliated with Santé.</span>
+    </footer>
   </body>
 </html>

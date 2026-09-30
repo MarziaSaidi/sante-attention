@@ -10,6 +10,7 @@ const summaryCount = document.querySelector('#summaryCount');
 const sidebar = document.querySelector('.sidebar');
 const menuButton = document.querySelector('#menuButton');
 const promotionActivity = document.querySelector('#promotionActivity');
+const resetDemoButton = document.querySelector('#resetDemo');
 panel.inert = true;
 
 let quantity = 2;
@@ -28,6 +29,18 @@ const rose = {
   soldDuringPromotion: 8,
   channels: { pos: true, ecommerce: true, email: true, sms: false },
   published: false
+};
+
+const decisionToPanel = {
+  modelo: 'modelo',
+  titos: 'titos',
+  'whispering-angel': 'rose'
+};
+
+const panelToDecision = {
+  modelo: 'modelo',
+  titos: 'titos',
+  rose: 'whispering-angel'
 };
 
 const money = (value) => `$${value.toFixed(2)}`;
@@ -321,12 +334,42 @@ function openPanel(type) {
   setTimeout(() => document.querySelector('#closePanel').focus(), 30);
 }
 
-function closePanel() {
+function closePanel({ syncUrl = true } = {}) {
   panel.classList.remove('open');
   panel.inert = true;
   panel.setAttribute('aria-hidden', 'true');
   scrim.hidden = true;
   document.body.style.overflow = '';
+
+  const url = new URL(window.location.href);
+  if (!syncUrl || !decisionToPanel[url.searchParams.get('decision')]) return;
+
+  if (history.state?.attentionDecision) {
+    history.back();
+  } else {
+    url.pathname = '/prototype';
+    url.search = '';
+    history.replaceState({}, '', url);
+  }
+}
+
+function openDecision(decision, { replace = false } = {}) {
+  const type = decisionToPanel[decision];
+  if (!type) return;
+
+  const url = new URL(window.location.href);
+  url.pathname = '/prototype';
+  url.search = '';
+  url.searchParams.set('decision', decision);
+  history[replace ? 'replaceState' : 'pushState']({ attentionDecision: decision }, '', url);
+  openPanel(type);
+}
+
+function syncPanelToUrl() {
+  const decision = new URL(window.location.href).searchParams.get('decision');
+  const type = decisionToPanel[decision];
+  if (type) openPanel(type);
+  else closePanel({ syncUrl: false });
 }
 
 function bindExplanation() {
@@ -481,7 +524,36 @@ function hideToast() {
   toast.setAttribute('aria-hidden', 'true');
 }
 
-document.querySelectorAll('[data-open]').forEach((button) => button.addEventListener('click', () => openPanel(button.dataset.open)));
+function resetDemo() {
+  quantity = 2;
+  undoItem = null;
+  rose.channels = { pos: true, ecommerce: true, email: true, sms: false };
+  rose.published = false;
+  document.querySelectorAll('.attention-row').forEach((row) => row.classList.remove('resolved'));
+  promotionActivity.hidden = true;
+  sidebar.classList.remove('mobile-open');
+  menuButton.setAttribute('aria-expanded', 'false');
+  updateCounts();
+  closePanel({ syncUrl: false });
+  hideToast();
+
+  const url = new URL(window.location.href);
+  url.pathname = '/prototype';
+  url.search = '';
+  history.replaceState({}, '', url);
+  window.scrollTo({ top: 0, behavior: 'auto' });
+  showToast('Demo reset.');
+}
+
+document.querySelectorAll('[data-open]').forEach((button) => button.addEventListener('click', () => {
+  const decision = panelToDecision[button.dataset.open];
+  if (decision) openDecision(decision);
+  else openPanel(button.dataset.open);
+}));
+document.querySelectorAll('[data-decision-link]').forEach((link) => link.addEventListener('click', (event) => {
+  event.preventDefault();
+  openDecision(link.dataset.decisionLink);
+}));
 document.querySelectorAll('[data-action]').forEach((button) => button.addEventListener('click', () => {
   const messages = { discrepancy: 'Inventory count review opened.', match: 'Invoice matching review opened.' };
   showToast(messages[button.dataset.action]);
@@ -491,6 +563,8 @@ document.querySelector('#openPromotionActivity').addEventListener('click', () =>
 document.querySelector('#closePanel').addEventListener('click', closePanel);
 scrim.addEventListener('click', closePanel);
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closePanel(); });
+resetDemoButton.addEventListener('click', resetDemo);
+window.addEventListener('popstate', syncPanelToUrl);
 
 toastUndo.addEventListener('click', () => {
   if (!undoItem) return;
@@ -504,3 +578,5 @@ menuButton.addEventListener('click', () => {
   const open = sidebar.classList.toggle('mobile-open');
   menuButton.setAttribute('aria-expanded', String(open));
 });
+
+syncPanelToUrl();
